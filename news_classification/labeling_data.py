@@ -9,19 +9,30 @@ data = data[data["Content"].str.len() > 10]
 
 data = data[data["Title"].str.len() > 10]
 
+# ## Keyword cho những tin tức vi pham động vật hoang dã 6 words only
+# Violate_Keywords = ["buôn bán động vật", "săn bắt động vật", "vận chuyển trái phép động vật", "ngược đãi động vật"
+#                     "săn bắt loài", "giết mổ động vật",
+#                     "tàng trữ động vật"]
+#
+# ## Keyword cho những tin tức bảo tồn động vật
+#
+# Observation_Keywords = ["cứu hộ động vật", "cứu trợ động vật", "giải cứu động vật", "bảo vệ động vật",
+#                         "bảo tồn động vật", "quản lý động vật"
+#                         "bảo vệ loài"]
+
+
 ## Keyword cho những tin tức vi pham động vật hoang dã 6 words only
-Violate_Keywords = ["buôn bán động vật", "săn bắt động vật", "vận chuyển trái phép ngà voi",
-                    "vận chuyển trái phép tê tê", "ngược đãi", "cò tặc", "buôn bán", "săn bắt", "vận chuyển",
+Violate_Keywords = ["buôn bán động vật", "săn bắt động vật", "tàng trữ động vật",
+                    "vận chuyển tê tê", "ngược đãi", "buôn bán", "săn bắt", "vận chuyển",
                     "buôn bán ngà voi",
                     "buôn bán tê tê", "săn bắt ngà voi", "buôn bán ngà voi", "ngược đãi động vật"]
 
 ## Keyword cho những tin tức bảo tồn động vật
 
-Observation_Keywords = ["giải cứu động vật", "giải thoát", "giải cứu tê tê", "giải cứu tê giác", "cứu hộ tê tê",
+Observation_Keywords = ["giải cứu động vật", "giải cứu tê tê", "giải cứu tê giác", "cứu hộ tê tê",
                         "cứu hộ động vật",
-                        "phòng chống",
-                        "bảo tồn động vật hoang dã", "bảo tồn", "giải cứu", "cứu hộ", "bảo vệ",
-                        "bảo tồn tê tê", "bảo tồn tê giác", "bảo vệ động vật hoang dã", "bảo vệ tê tê", "bảo vệ hổ"]
+                        "bảo tồn động vật", "bảo tồn", "giải cứu", "cứu hộ",
+                        "bảo tồn tê tê", "bảo tồn tê giác", "bảo vệ động vật", "bảo vệ tê tê"]
 
 keywords = Violate_Keywords + Observation_Keywords
 
@@ -57,7 +68,7 @@ def find_class(sample):
     per1 = float(percentage1(y0, y1))
     per2 = float(percentage1(y0, y2))
 
-    if (y0 == 0):
+    if y0 == 0:
         category = 0
     else:
         if per1 >= per2:

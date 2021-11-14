@@ -54,7 +54,7 @@ def categorize(category):
         return "Counter Wildlife Trafficking"
 
 response = []
-for i in range(1, 20):
+for i in range(1, 30):
 
     page = requests.get(
         f"https://dantri.com.vn/xa-hoi/moi-truong/trang-{i}.htm")
@@ -85,20 +85,20 @@ for i in range(1, 20):
         document = f"{title} {subtitle} {content}"
         label = loaded_model.predict([document])
         if label[0] != 0:
-            result = {
-                "link": "https://dantri.com.vn" + allLinks[i],
-                "image": image[0].attrs["src"],
-                "title": title[0].getText().strip(),
-                "subtitle": subtitle[0].getText().strip(),
-                "date":  datetime[0].getText().strip(),
-                "author": author[-1].getText().strip(),
-                "category": categorize(label[0])
-            }
-            response.append(result)
-            # print("link: ", "https://dantri.com.vn" + allLinks[i])
-            # print("image: ", image[0].attrs["src"])
-            # print("title: ", title[0].getText().strip())
-            # print("subtitle: ", subtitle[0].getText().strip())
-            # print("date: ", datetime[0].getText().strip())
-            # print("author: ", author[-1].getText().strip())
-            # print("category: ", categorize(label[0]))
+            # result = {
+            #     "link": "https://dantri.com.vn" + allLinks[i],
+            #     "image": image[0].attrs["src"],
+            #     "title": title[0].getText().strip(),
+            #     "subtitle": subtitle[0].getText().strip(),
+            #     "date":  datetime[0].getText().strip(),
+            #     "author": author[-1].getText().strip(),
+            #     "category": categorize(label[0])
+            # }
+            # response.append(result)
+            print("link: ", "https://dantri.com.vn" + allLinks[i])
+            print("image: ", image[0].attrs["src"])
+            print("title: ", title[0].getText().strip())
+            print("subtitle: ", subtitle[0].getText().strip())
+            print("date: ", datetime[0].getText().strip())
+            print("author: ", author[-1].getText().strip())
+            print("category: ", categorize(label[0]))

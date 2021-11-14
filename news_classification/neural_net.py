@@ -1,4 +1,5 @@
 from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import pickle
@@ -7,14 +8,16 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
+from sklearn.svm import SVC
+
 import time
 import os
 
 data = pd.read_csv("dataset.csv")
-feature = ["Title", "Content"]
+feature = "Content"
 label = "category"
 
-X_train, X_test, y_train, y_test = train_test_split(data[feature[0]] + " " + data[feature[1]], data[label],
+X_train, X_test, y_train, y_test = train_test_split(data[feature], data[label],
                                                     test_size=0.2,
                                                     random_state=42)
 
@@ -23,6 +26,7 @@ text_clf = Pipeline([('vect', CountVectorizer(ngram_range=(1, 1),
                                               max_df=0.8,
                                               max_features=None)),
                      ('tfidf', TfidfTransformer()),
+                     # ("clf", SVC(gamma="scale"))
                      ('clf', LogisticRegression(solver='lbfgs',
                                                 multi_class='auto',
                                                 max_iter=10000))
