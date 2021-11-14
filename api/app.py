@@ -108,7 +108,7 @@ def login():
     else:
         return "Get something here"
 
-
+@app.route("/gendata")
 def runBackground():
     response = []
     for i in range(1, 20):
@@ -152,23 +152,13 @@ def runBackground():
                     "category": categorize(label[0])
                 }
                 response.append(result)
-    jsonFile = jsonify({"counts": len(response), "data": response})
+    jsonFile = {"counts": len(response), "data": response}
     with open('data.json', 'w', encoding='utf-8') as f:
         json.dump(jsonFile, f, ensure_ascii=False, indent=4)
-    print(f"Complete thread. Found {len(response)} news.")
+    print(f"Complete. Found {len(response)} news.")
+    return jsonify(jsonFile)
 
 
-def set_interval(func, sec):
-    def func_wrapper():
-        set_interval(func, sec)
-        func()
-
-    t = threading.Timer(sec, func_wrapper)
-    t.start()
-    return t
-
-
-set_interval(runBackground, 60)
 
 
 @app.route("/crawler")
